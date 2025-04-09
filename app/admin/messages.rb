@@ -14,5 +14,16 @@ ActiveAdmin.register Message do
     permitted << :admin_user_id if params[:action] == 'create' && current_admin_user.present?
     permitted
   end
+
+  form do |f|
+    f.inputs do
+      f.input :title
+      f.input :description
+      f.input :project_id, as: :select, collection: Project.all.map { |p| [p.name, p.id] }, include_blank: false
+      f.input :admin_user_id, as: :select, collection: AdminUser.all.map { |a| [a.email, a.id] }, include_blank: false
+      f.input :status, as: :select, collection: ['unread', 'read', 'archived'], include_blank: false
+    end
+    f.actions
+  end
   
 end

@@ -13,13 +13,26 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel "Recent Projects" do
-          ul do
-            Project.recent(5).map do |project|
-              li link_to(project.name, admin_project_path(project))
-              li project.description
-              li project.status
-              li project.created_at
-              li project.updated_at
+          table do
+            thead do
+              tr do
+                th "Name"
+                th "Description"
+                th "Status"
+                th "Created At"
+                th "Updated At"
+              end
+            end
+            tbody do
+              Project.recent(5).map do |project|
+                tr do
+                  td link_to(project.name, admin_project_path(project))
+                  td project.description
+                  td Project.statuses.key(project.status)
+                    td project.created_at.strftime("%B %d, %Y %H:%M")
+                    td project.updated_at.strftime("%B %d, %Y %H:%M")
+                end
+              end
             end
           end
         end
@@ -27,13 +40,26 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
         panel "Recent Messages" do
-          ul do
-            Message.recent(5).map do |message|
-              li link_to(message.title, admin_message_path(message))
-              li message.description
-              li message.status
-              li message.created_at
-              li message.updated_at
+          table do
+            thead do
+              tr do
+                th "Title"
+                th "Description"
+                th "Status"
+                th "Created At"
+                th "Updated At"
+              end
+            end
+            tbody do
+              Message.recent(5).map do |message|
+                tr do
+              td link_to(message.title, admin_message_path(message))
+              td message.description
+              td message.status
+              td message.created_at
+              td message.updated_at
+                end
+              end
             end
           end
         end

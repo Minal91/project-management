@@ -7,7 +7,7 @@ class Project < ApplicationRecord
   validates :description, presence: true
   scope :active, -> { where(status: 'active') }
   scope :completed, -> { where(status: 'completed') }
-  enum status: { pending: 0, approved: 1, active: 2, completed: 3 }
+  enum status: [:pending, :active, :completed, :archived]
   # Callbacks
   before_save :set_default_status
 

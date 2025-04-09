@@ -9,10 +9,13 @@ ActiveAdmin.register Project do
   #
   # or
   #
-  # permit_params do
-  #   permitted = [:name, :description, :status]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :description
+      f.input :status, as: :select, collection: Project.statuses.keys, include_blank: false, selected: f.object.status
+    end
+    f.actions
+  end
   
 end
