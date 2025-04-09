@@ -28,9 +28,9 @@ ActiveAdmin.register_page "Dashboard" do
                 tr do
                   td link_to(project.name, admin_project_path(project))
                   td project.description
-                  td Project.statuses.key(project.status)
-                    td project.created_at.strftime("%B %d, %Y %H:%M")
-                    td project.updated_at.strftime("%B %d, %Y %H:%M")
+                  td project.status
+                  td project.created_at.strftime("%B %d, %Y %H:%M")
+                  td project.updated_at.strftime("%B %d, %Y %H:%M")
                 end
               end
             end
@@ -44,6 +44,7 @@ ActiveAdmin.register_page "Dashboard" do
             thead do
               tr do
                 th "Title"
+                th "Project Name"
                 th "Description"
                 th "Status"
                 th "Created At"
@@ -53,11 +54,12 @@ ActiveAdmin.register_page "Dashboard" do
             tbody do
               Message.recent(5).map do |message|
                 tr do
-              td link_to(message.title, admin_message_path(message))
-              td message.description
-              td message.status
-              td message.created_at
-              td message.updated_at
+                  td link_to(message.title, admin_message_path(message))
+                  td link_to(message.project.name, admin_project_path(message.project))
+                  td message.description
+                  td message.status
+                  td message.created_at
+                  td message.updated_at
                 end
               end
             end
