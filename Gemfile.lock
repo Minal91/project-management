@@ -122,7 +122,6 @@ GEM
       responders
       warden (~> 1.2.3)
     drb (2.2.1)
-    error_highlight (0.7.0)
     erubi (1.13.1)
     ffi (1.16.3)
     formtastic (5.0.0)
@@ -364,7 +363,6 @@ DEPENDENCIES
   capybara
   debug
   devise
-  error_highlight
   importmap-rails
   jbuilder
   puma (>= 5.0)
